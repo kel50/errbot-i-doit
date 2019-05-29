@@ -18,10 +18,14 @@ class Search(unittest.TestCase):
         self.result = search('hrlxreportsp01')
         print(self.result)
 
-    @unittest.skip('test')
     def test_searchnet(self):
-        self.result = search('client', 'Net')
+        self.result = search('IVZ Clients', 'Net')
         print(self.result)
+
+    def test_emptysearch(self):
+        self.result = search('')
+        print(self.result)
+
 
 if __name__ == '__main__':
     unittest.main()
