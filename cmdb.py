@@ -2,6 +2,7 @@
 import subprocess
 
 IDOITCLI = 'idoitcli --no-colors'
+RELEVANT_FIELDS = ['Title', 'ID', 'Type', 'CMDB status', 'Created', 'Updated', 'E-mail address', 'Last change by', 'Function', 'Personnel number', 'Telephone company', 'Cellphone', 'Department']
 
 
 def clirun(command, arguments=None):
@@ -36,3 +37,23 @@ def searchformatter(objectliststring):
         itemlist = [i.split('\n') for i in objectliststring.split('\n\n')]  # get single lines for every search result item
         items = [{'name': i[0], 'place':i[1].replace('Source: ', ''), 'url': i[2].replace('Link: ', '')} for i in itemlist]  # save information to dict and remove description in text
         return '\n'.join(["```\n<{url}|{name}> ({place})\n```".format(**item) for item in items])
+
+
+def nonemptyformatter(infostring):
+        lines = infostring.split('\n')
+        result = []
+        for line in lines:
+            if not line.endswith(': -'):
+                result.append(line)
+        return '\n'.join(result)
+
+
+def relevantformatter(infostring):
+        lines = infostring.split('\n')
+        result = []
+        for line in lines:
+            if line.split(':')[0] in RELEVANT_FIELDS and line not in result:
+                result.append(line)
+        return '\n'.join(result)
+        
+

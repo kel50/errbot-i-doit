@@ -27,7 +27,9 @@ class CMDB(BotPlugin):
     @botcmd
     def cmdb_show (self, msg, args):
         """ Objektdetailansicht """
-        return cmdb.clirun('show', str(args))[1]
+        result = cmdb.clirun('show', str(args))[1]
+#        return cmdb.nonemptyformatter(result)
+        return cmdb.relevantformatter(result)
 
     @botcmd
     def cmdb_nextip(self, msg, args):
