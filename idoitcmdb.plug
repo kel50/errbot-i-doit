@@ -1,0 +1,9 @@
+[Core]
+Name = CMDB
+Module = idoitcmdb
+
+[Documentation]
+Description = i-doit CMDB Connection
+
+[Python]
+Version = 2+
