@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import subprocess
 
-IDOITCLI = 'idoitcli --no-colors'
-RELEVANT_FIELDS = ['Title', 'ID', 'Type', 'CMDB status', 'Created', 'Updated', 'E-mail address', 'Last change by', 'Function', 'Personnel number', 'Telephone company', 'Cellphone', 'Department']
+IDOITCLI = 'idoitcli --no-colors -y'
+RELEVANT_FIELDS = ['Title', 'ID', 'Type', 'CMDB status', 'Created', 'Updated', 'E-mail address', 'Last change by', 'Function', 'Personnel number', 'Telephone company', 'Cellphone', 'Department', 'Description']
 
 
 def clirun(command, arguments=None):

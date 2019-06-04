@@ -15,30 +15,35 @@ class CMDB(BotPlugin):
 
     @botcmd
     def cmdb_search(self, msg, args):
-        """ CMDB Suche """
+        """ CMDB search """
         result = cmdb.search(str(args))
         return cmdb.searchformatter(result)
 
     @botcmd
     def cmdb_nets(self, msg, args):
-        """ Netzwerk Suche """
-        return search(str(args), filter='Net')
+        """ network search """
+        return cmdb.search(str(args), filter='Net')
 
     @botcmd
     def cmdb_show (self, msg, args):
-        """ Objektdetailansicht """
+        """ object view """
         result = cmdb.clirun('show', str(args))[1]
-#        return cmdb.nonemptyformatter(result)
         return cmdb.relevantformatter(result)
 
     @botcmd
+    def cmdb_show_v(self, msg, args):
+        """ object detail view """
+        result = cmdb.clirun('show', str(args))[1]
+        return cmdb.nonemptyformatter(result)
+
+    @botcmd
     def cmdb_nextip(self, msg, args):
-        """ Nächste freie IP in einem Netzwerk """
+        """ next free IP address """
         return cmdb.clirun('nextip', str(args))[1]
 
     @botcmd
     def cmdb_read(self, msg, args):
-       """ Kategorienübersicht """
+       """ category overview """
        if args:
             return cmdb.clirun('read', str(args))[1]
        else:
