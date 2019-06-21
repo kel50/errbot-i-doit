@@ -2,6 +2,7 @@
 import subprocess
 from errbot import BotPlugin, botcmd
 import cmdb
+from cmdbformatter import searchformatter, nonemptyformatter, relevantformatter
 
 
 class CMDB(BotPlugin):
@@ -17,7 +18,7 @@ class CMDB(BotPlugin):
     def cmdb_search(self, msg, args):
         """ CMDB search """
         result = cmdb.search(str(args))
-        return cmdb.searchformatter(result)
+        return searchformatter(result)
 
     @botcmd
     def cmdb_nets(self, msg, args):
@@ -28,13 +29,13 @@ class CMDB(BotPlugin):
     def cmdb_show (self, msg, args):
         """ object view """
         result = cmdb.clirun('show', str(args))[1]
-        return cmdb.relevantformatter(result)
+        return relevantformatter(result)
 
     @botcmd
     def cmdb_show_v(self, msg, args):
         """ object detail view """
         result = cmdb.clirun('show', str(args))[1]
-        return cmdb.nonemptyformatter(result)
+        return nonemptyformatter(result)
 
     @botcmd
     def cmdb_nextip(self, msg, args):
