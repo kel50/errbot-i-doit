@@ -15,11 +15,12 @@ logger.setLevel(logging.DEBUG)
 
 class Search(unittest.TestCase):
     def test_searchresult(self):
-        self.result = search('hrlxreportsp01')
+        self.result = search('mylittleserver')
+        self.assertIsInstance(searchformatter(self.result), list)
         print(self.result)
 
     def test_searchnet(self):
-        self.result = search('IVZ Clients', 'Net')
+        self.result = search('testnet', 'Net')
         print(self.result)
 
     def test_emptysearch(self):
