@@ -4,7 +4,7 @@ def searchformatter(objectliststring):
         return 'Keine Ergebnisse'
     itemlist = [i.split('\n') for i in objectliststring.split('\n\n')]  # get single lines for every search result item
     items = [{'name': i[0], 'place':i[1].replace('Source: ', ''), 'url': i[2].replace('Link: ', '')} for i in itemlist]  # save information to dict and remove description in text
-    return '\n'.join(["```\n<{url}|{name}> ({place})\n```".format(**item) for item in items])
+    return '\n'.join(["- [_ {name} _]({url}) {place}".format(**item) for item in items])
 
 
 def nonemptyformatter(infostring):
