@@ -49,3 +49,16 @@ class CMDB(BotPlugin):
             return cmdb.clirun('read', str(args))[1]
        else:
             return cmdb.clirun('read')[1]
+
+    @botcmd(split_args_with=',')
+    def cmdb_newserver(self, msg, args):
+        """ create new server with name, location, IP"""
+        name, location, ip = args
+        cmdb.clirun('save',  'server/{}'.format(name))
+        cmdb.clirun('save server/{}/location -a location=\"{}\"'.format(name.strip(), location.strip()))
+        cmdb.clirun('save \"server/{}/Host address\" -a \"IPv4 address\"=\"{}\"'.format(name.strip(), ip.strip()))
+        yield 'idoitcli save \"server/{}/Host address\" -a \"IPv4 address\"=\"{}\"'.format(name.strip(), ip.strip())
+        result = cmdb.search(name)
+        yield searchformatter(result)
+#        yield cmdb.clirun('read \"server/{}/Host address\"'.format(name.strip()))[1]
+        yield nonemptyformatter(cmdb.clirun('read \"server/{}/location\"'.format(name.strip()))[1])
