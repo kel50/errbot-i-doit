@@ -1,3 +1,5 @@
+RELEVANT_FIELDS = ['Title', 'ID', 'Type', 'CMDB status', 'Created', 'Updated', 'E-mail address', 'Last change by', 'Function', 'Personnel number', 'Telephone company', 'Cellphone', 'Department', 'Description']
+
 def searchformatter(objectliststring):
     """ format search result with links """
     if objectliststring.split('\n\n')[0] == '':
@@ -25,3 +27,10 @@ def relevantformatter(infostring):
         if line.split(':')[0] in RELEVANT_FIELDS and line not in result:
             result.append(line)
     return '\n'.join(result)
+
+
+def codeformatter(codestring):
+    """ return code """
+    return "```\n{}\n```".format(codestring)
+
+
